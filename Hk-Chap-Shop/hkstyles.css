@@ -1,0 +1,38 @@
+table {
+    background-color: darkgray;
+    text-emphasis-color: black;
+    text-justify: auto;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+.textcolour {
+    color: black;
+}
+
+.linkscolour {
+    color: rgb(139, 0, 0);
+    text-shadow: black;
+}
+
+#sports-table {
+    color: black;
+    border: solid 2px black;
+    width: fit-content;
+}
+
+#href-links {
+    display: inline-table;
+    font-size: large;
+    font-family: Helvetica;
+    border: solid 2PX;
+    padding: 5PX;
+    width: fit-content;
+    height: fit-content;
+    background-color: aliceblue;
+    text-align: left;
+}

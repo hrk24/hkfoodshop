@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css" type="text/css">
+    <title>Hemanth's Pie Shop</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="chaps.html">Chaaps</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside><img src="/images/chaplogo.png" alt="HK chap Shop"></aside>
+        <article>
+            <h1>Order Confirmed</h1>
+            <div class="orderconfirmed">
+                <p class="desc"></p>
+                <p>Your order will be delivered soon!</p>
+            </div>
+        </article>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="chaps.html">Chaaps</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script>
+        window.addEventListener("DOMContentLoaded",function(e) {
+            const order = localStorage.getItem("order");
+
+            if(order){
+            const pieOrder = JSON.parse(order);
+            const pie = document.querySelector(".orderconfirmed");
+            const desc = pie.querySelector(".desc");
+            desc.innerText = "Thank You For Ordering " + pieOrder.desc;
+            }
+
+        });
+    </script>
+</body>
+</html>

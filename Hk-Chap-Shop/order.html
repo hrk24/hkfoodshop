@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css" type="text/css">
+    <title>Hemanth's chap Shop</title>
+    <style>
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input,
+        .input-group textarea,
+        .input-group select {
+            padding: 10px;
+            border: solid 1px #999;
+            border-radius: 2px;
+            width: 100%
+        }
+
+        label {
+            font-weight: 600;
+        }
+
+        input[type="reset"] {
+            background: none;
+            border: transparent;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        input[type="submit"] {
+            border: solid 1px #999;
+            border-radius: 3px;
+            padding: 10px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            article {
+                width: 350px
+            }
+
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="chaps.html">Chaaps</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside><img src="/images/chaplogo.png" alt="HK chap Shop"></aside>
+        <article>
+            <h1>Order</h1>
+
+            <div class="chap">
+                <img src="" alt="">
+                <div class="columns">
+                    <div class="title"></div>
+                    <div class="price"></div>
+                </div>
+                <p class="desc"></p>
+            </div>
+
+            <form action="/orderplaced.html" method="get">
+                <input type="hidden" name="chap-order" id="chap-order">
+                <input type="hidden" name="location" id="location">
+
+                <div class="input-group">
+                    <div><label for="first-name">First Name</label></div>
+                    <div><input type="text" name="first-name" id="first-name" /></div>
+                </div>
+                <div class="input-group">
+                    <div><label for="last-name">Last Name</label></div>
+                    <div><input type="text" name="last-name" id="last-name" /></div>
+                </div>
+                <div class="input-group">
+                    <div><label for="Address">Address</label></div>
+                    <div><input type="text" name="address" id="address" /></div>
+                </div>
+                <div class="input-group">
+                    <div><label for="state">State</label></div>
+                    <div><select name="state" id="state">
+                            <option value="" selected>[Select One]</option>
+                            <option>Anna Nagar</option>
+                            <option>Kilpauk</option>
+                            <option>Purasaiwalkkam</option>
+                            <option>Avadi</option>
+                        </select></div>
+                </div>
+                <div class="input-group">
+                    <div><label for="PostalCode">PostalCode</label></div>
+                    <div><input type="text" name="PostalCode" id="PostalCode" /></div>
+                </div>
+                <div class="input-group">
+                    <div><label for="comments">Comments</label></div>
+                    <div><textarea name="comments" id="comments" cols="30" rows="10"></textarea></div>
+                </div>
+                <input type="reset"  value="Reset" />
+                <input type="submit" value="Order" />
+            </form>
+        </article>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="chaps.html">chaps</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+<script>
+    window.addEventListener("DOMContentLoaded", function (e) {
+        const order = localStorage.getItem("order");
+
+        if (order) {
+
+            const orderInput = document.querySelector("#chap-order");
+            orderInput.value = order;
+
+            let locationBox = document.querySelector("#location");
+            let location = {
+                latitude: "unknown",
+                longitude: "unknown"
+            };
+
+            window.navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    location = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    }
+                    locationBox.value = JSON.stringify(location);
+                },
+                function (error) {
+                    console.log("Error Fetching the Location");
+                    locationBox.value = JSON.stringify(location);
+                });
+
+            const chapOrder = JSON.parse(order);
+            const chap = document.querySelector(".chap");
+
+            const title = chap.querySelector(".title");
+            const price = chap.querySelector(".price");
+            const desc = chap.querySelector(".desc");
+
+            title.innerText = chapOrder.title;
+            price.innerText = chapOrder.price;
+            desc.innerText = chapOrder.desc;
+
+            const img = chap.querySelector("img");
+            img.setAttribute("src", `images/${chapOrder.id}.png`);
+            img.setAttribute("alt", chapOrder.title);
+        }      
+    });
+</script>
+</body>
+</html>

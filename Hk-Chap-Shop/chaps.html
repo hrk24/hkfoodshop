@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="site.css" type="text/css">
+    <title>Chaps | HK Chap Shop</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="chaps.html">Chaps</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <aside><img src="/images/chaplogo.png" alt="Bethany's Pie Shop"></aside>
+        <article>
+            <h1>Chaps</h1>
+            <section class="columns-desktop">
+                <div class="chap">
+                    <img src="/images/tandoori-chap.PNG" alt="Tandoori Chap">
+                    <div class="columns">
+                        <div class="title">Tandoori Chap</div>
+                        <div class="price">$12.95</div>
+                    </div>
+                    <p class="desc">A Staple of Tandoori Lovers</p>
+                    <button data-order="tandoori-chap">Order</button>
+                </div>
+                <div class="chap">
+                    <img src="/images/malai-chap.png" alt="Malai Chap">     
+                    <div class="columns">
+                        <div class="title">Malai Chap</div>
+                        <div class="price">$15.95</div>
+                    </div>
+                    <br>
+                    <p class="desc">A Classic With Rich Texture</p>
+                    <button data-order="malai-chap">Order</button>
+                </div>
+            </section>
+        </article>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="chaps.html">Chaaps</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+<script>
+    window.addEventListener("DOMContentLoaded", function (e) {
+        const orderButtons = document.querySelectorAll("button[data-order]");
+        orderButtons.forEach(function (button) {
+            button.addEventListener("click", function (e) {
+                const button = e.currentTarget;
+                const container = button.parentNode;
+                const order = {
+                    id: button.getAttribute("data-order"),
+                    title: container.querySelector(".title").innerText,
+                    price: container.querySelector(".price").innerText,
+                    desc: container.querySelector(".desc").innerText
+                };
+                console.log(order);
+                localStorage.setItem("order",JSON.stringify(order));
+
+                const url = window.location.href.replace("chaps.html","order.html");
+                window.location.href=url;
+            });
+        });
+    });
+
+
+</script>
+
+</html>
